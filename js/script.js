@@ -37,6 +37,13 @@ class LinkedList {
     current.next = newNode;
     newNode.next = null;
   }
+  DeleteNodeStart(data) { 
+    if (this.start === null) {
+      return
+    }
+    this.start = this.start.next
+  }
+
   PrintList() {
     if (this.start === null) {
       ll.innerHTML = "START --> END ";
@@ -54,8 +61,9 @@ class LinkedList {
 }
 
 const ll = document.querySelector("#ll");
-const btn_start = document.querySelector("#add-start");
-const btn_end = document.querySelector("#add-end");
+const btn_add_start = document.querySelector("#add-start");
+const btn_add_end = document.querySelector("#add-end");
+const btn_delete_start = document.querySelector("#delete-start");
 const text_word = document.querySelector("#input");
 let newInput = "";
 const list = new LinkedList();
@@ -63,8 +71,16 @@ list.PrintList();
 text_word.addEventListener("change", (event) => {
   newInput = event.target.value;
 });
-btn_start.addEventListener("click", () => {
+btn_add_start.addEventListener("click", () => {
   list.AddNodeBeginning(`<h2>${newInput}</h2>`);
+  list.PrintList();
+});
+btn_add_end.addEventListener("click", () => {
+  list.AddNodeEnd(`<h2>${newInput}</h2>`);
+  list.PrintList();
+});
+btn_delete_start.addEventListener("click", () => {
+  list.DeleteNodeStart(newInput);
   list.PrintList();
 });
 btn_end.addEventListener("click", () => {
